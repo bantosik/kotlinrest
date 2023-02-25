@@ -6,3 +6,7 @@ Content-Type: application/json
   "id": 999,
   "value": "content"
 }
+
+### Send POST request with json body
+POST https://httpbin.org/status/403
+Content-Type: application/json

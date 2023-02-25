@@ -12,4 +12,19 @@ class APITest {
         val response = HttpClients.httpBinClient().create(item)
         Assertions.assertEquals(item, response.json)
     }
+
+    @Test
+    fun `Feign client throws exception when 500 is returned`() {
+        // assert exception is thrown
+        val e = Assertions.assertThrows(Exception::class.java) {
+            HttpClients.httpBinClient().status(500)
+        }
+        Assertions.assertTrue(e.message!!.contains("[500 INTERNAL SERVER ERROR] during [POST] to [https://httpbin.org/status/500]"), "Exception message should contain HTTP status code")
+    }
+
+    @Test
+    fun `Feign client should not throw exception when 201 is returned`() {
+        // assert exception is thrown
+        HttpClients.httpBinClient().status(201)
+    }
 }
